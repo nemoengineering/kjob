@@ -1,7 +1,7 @@
-import it.justwrote.kjob.InMem
-import it.justwrote.kjob.Job
-import it.justwrote.kjob.job.JobExecutionType
-import it.justwrote.kjob.kjob
+import sh.nemo.kjob.InMem
+import sh.nemo.kjob.Job
+import sh.nemo.kjob.job.JobExecutionType
+import sh.nemo.kjob.kjob
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
 

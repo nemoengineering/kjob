@@ -1,8 +1,8 @@
-import it.justwrote.kjob.Job
-import it.justwrote.kjob.KJob
-import it.justwrote.kjob.Mongo
-import it.justwrote.kjob.job.JobExecutionType
-import it.justwrote.kjob.kjob
+import sh.nemo.kjob.Job
+import sh.nemo.kjob.KJob
+import sh.nemo.kjob.Mongo
+import sh.nemo.kjob.job.JobExecutionType
+import sh.nemo.kjob.kjob
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
 

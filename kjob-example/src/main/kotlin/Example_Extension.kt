@@ -1,5 +1,5 @@
-import it.justwrote.kjob.*
-import it.justwrote.kjob.extension.*
+import sh.nemo.kjob.*
+import sh.nemo.kjob.extension.*
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
 

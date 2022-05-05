@@ -1,8 +1,8 @@
-import it.justwrote.kjob.InMem
-import it.justwrote.kjob.KronJob
-import it.justwrote.kjob.kjob
-import it.justwrote.kjob.kron.Kron
-import it.justwrote.kjob.kron.KronModule
+import sh.nemo.kjob.InMem
+import sh.nemo.kjob.KronJob
+import sh.nemo.kjob.kjob
+import sh.nemo.kjob.kron.Kron
+import sh.nemo.kjob.kron.KronModule
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
 import java.time.Instant
