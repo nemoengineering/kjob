@@ -124,7 +124,7 @@ project(":kjob-mongo") {
         testImplementation("io.reactivex.rxjava2:rxkotlin:2.4.0")
         testImplementation("io.kotest:kotest-runner-junit5:4.3.1")
         testImplementation("io.kotest:kotest-assertions-core:4.3.1")
-        testImplementation("de.flapdoodle.embed:de.flapdoodle.embed.mongo:3.0.0")
+        testImplementation("de.flapdoodle.embed:de.flapdoodle.embed.mongo:3.4.5")
         testImplementation("io.mockk:mockk:1.10.2")
         testImplementation(project(path = ":kjob-core", configuration = "testArtifacts"))
 
