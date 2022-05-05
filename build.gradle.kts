@@ -15,7 +15,7 @@ allprojects {
         mavenCentral()
     }
     group = "sh.nemo"
-    version = "0.2.1"
+    version = "0.1.0"
 }
 
 subprojects {
@@ -90,12 +90,12 @@ subprojects {
 project(":kjob-core") {
     dependencies {
         implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.1")
-        api("org.slf4j:slf4j-api:1.7.30")
+        api("org.slf4j:slf4j-api:1.7.36")
 
         testImplementation("io.kotest:kotest-runner-junit5:4.3.1")
         testImplementation("io.kotest:kotest-assertions-core:4.3.1")
         testImplementation("io.mockk:mockk:1.12.3")
-        testRuntimeOnly("ch.qos.logback:logback-classic:1.2.3")
+        testRuntimeOnly("ch.qos.logback:logback-classic:1.2.11")
     }
 }
 
@@ -111,7 +111,7 @@ project(":kjob-example") {
         }
 
         implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.1")
-        implementation("ch.qos.logback:logback-classic:1.2.3")
+        implementation("ch.qos.logback:logback-classic:1.2.11")
     }
 }
 
@@ -119,7 +119,7 @@ project(":kjob-mongo") {
     dependencies {
         implementation(project(":kjob-core"))
         implementation("org.mongodb:mongodb-driver-reactivestreams:4.6.0")
-        implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactive:1.4.0")
+        implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactive:1.6.1")
 
         testImplementation("io.reactivex.rxjava2:rxkotlin:2.4.0")
         testImplementation("io.kotest:kotest-runner-junit5:4.3.1")
@@ -128,7 +128,7 @@ project(":kjob-mongo") {
         testImplementation("io.mockk:mockk:1.12.3")
         testImplementation(project(path = ":kjob-core", configuration = "testArtifacts"))
 
-        testRuntimeOnly("ch.qos.logback:logback-classic:1.2.3")
+        testRuntimeOnly("ch.qos.logback:logback-classic:1.2.11")
     }
 }
 
@@ -142,7 +142,7 @@ project(":kjob-inmem") {
         testImplementation("io.mockk:mockk:1.12.3")
         testImplementation(project(path = ":kjob-core", configuration = "testArtifacts"))
 
-        testRuntimeOnly("ch.qos.logback:logback-classic:1.2.3")
+        testRuntimeOnly("ch.qos.logback:logback-classic:1.2.11")
     }
 }
 
@@ -161,6 +161,6 @@ project(":kjob-kron") {
         testImplementation("io.mockk:mockk:1.12.3")
         testImplementation(project(path = ":kjob-core", configuration = "testArtifacts"))
 
-        testRuntimeOnly("ch.qos.logback:logback-classic:1.2.3")
+        testRuntimeOnly("ch.qos.logback:logback-classic:1.2.11")
     }
 }
