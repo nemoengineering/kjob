@@ -94,7 +94,7 @@ project(":kjob-core") {
 
         testImplementation("io.kotest:kotest-runner-junit5:4.3.1")
         testImplementation("io.kotest:kotest-assertions-core:4.3.1")
-        testImplementation("io.mockk:mockk:1.10.2")
+        testImplementation("io.mockk:mockk:1.12.3")
         testRuntimeOnly("ch.qos.logback:logback-classic:1.2.3")
     }
 }
@@ -125,7 +125,7 @@ project(":kjob-mongo") {
         testImplementation("io.kotest:kotest-runner-junit5:4.3.1")
         testImplementation("io.kotest:kotest-assertions-core:4.3.1")
         testImplementation("de.flapdoodle.embed:de.flapdoodle.embed.mongo:3.0.0")
-        testImplementation("io.mockk:mockk:1.10.2")
+        testImplementation("io.mockk:mockk:1.12.3")
         testImplementation(project(path = ":kjob-core", configuration = "testArtifacts"))
 
         testRuntimeOnly("ch.qos.logback:logback-classic:1.2.3")
@@ -139,7 +139,7 @@ project(":kjob-inmem") {
 
         testImplementation("io.kotest:kotest-runner-junit5:4.3.1")
         testImplementation("io.kotest:kotest-assertions-core:4.3.1")
-        testImplementation("io.mockk:mockk:1.10.2")
+        testImplementation("io.mockk:mockk:1.12.3")
         testImplementation(project(path = ":kjob-core", configuration = "testArtifacts"))
 
         testRuntimeOnly("ch.qos.logback:logback-classic:1.2.3")
@@ -158,7 +158,7 @@ project(":kjob-kron") {
         testImplementation(project(":kjob-inmem"))
         testImplementation("io.kotest:kotest-runner-junit5:4.3.1")
         testImplementation("io.kotest:kotest-assertions-core:4.3.1")
-        testImplementation("io.mockk:mockk:1.10.2")
+        testImplementation("io.mockk:mockk:1.12.3")
         testImplementation(project(path = ":kjob-core", configuration = "testArtifacts"))
 
         testRuntimeOnly("ch.qos.logback:logback-classic:1.2.3")
