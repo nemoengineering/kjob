@@ -106,7 +106,7 @@ project(":kjob-example") {
         implementation(project(":kjob-mongo"))
         implementation(project(":kjob-inmem"))
 
-        implementation("com.cronutils:cron-utils:9.1.1") {
+        implementation("com.cronutils:cron-utils:9.1.6") {
             exclude(group = "org.slf4j", module = "slf4j-simple")
         }
 
@@ -150,7 +150,7 @@ project(":kjob-kron") {
     dependencies {
         implementation(project(":kjob-core"))
         implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.0")
-        implementation("com.cronutils:cron-utils:9.1.1") {
+        implementation("com.cronutils:cron-utils:9.1.6") {
             exclude(group = "org.slf4j", module = "slf4j-simple")
         }
         api("org.slf4j:slf4j-api:1.7.30")
