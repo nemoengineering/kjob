@@ -5,17 +5,14 @@ plugins {
     `maven-publish`
     kotlin("jvm") version "1.6.21"
     id("com.adarshr.test-logger") version "2.1.1"
-    id("com.github.ben-manes.versions") version "0.34.0"
-    id("nebula.release") version "15.0.1"
-    id("jacoco")
-    id("com.github.kt3k.coveralls") version "2.10.2"
 }
 
 allprojects {
     repositories {
         jcenter()
     }
-    group = "it.justwrote"
+    group = "sh.nemo"
+    version = "0.2.1"
 }
 
 subprojects {
@@ -23,8 +20,6 @@ subprojects {
         plugin("kotlin")
         plugin("org.gradle.maven-publish")
         plugin("com.adarshr.test-logger")
-        plugin("com.github.kt3k.coveralls")
-        plugin("jacoco")
     }
 
     val compileKotlin: KotlinCompile by tasks
@@ -55,32 +50,6 @@ subprojects {
         showSimpleNames = true
         showStandardStreams = true
     }
-
-    jacoco {
-        toolVersion = "0.8.5"
-    }
-
-    tasks.jacocoTestReport {
-        reports {
-            xml.isEnabled = true
-            html.isEnabled = true
-            csv.isEnabled = false
-            html.destination = File("${buildDir}/reports/jacoco/test/html")
-        }
-    }
-
-    tasks.jacocoTestCoverageVerification {
-        violationRules {
-            rule {
-                limit {
-                    minimum = BigDecimal(0.8)
-                }
-            }
-        }
-    }
-
-    tasks.getByName("check") { dependsOn("jacocoTestCoverageVerification") }
-    tasks.test { finalizedBy("jacocoTestReport") }
 
     configurations.create("testArtifacts") {
         extendsFrom(configurations["testRuntime"])
@@ -114,29 +83,6 @@ subprojects {
         }
     }
 }
-
-//coveralls {
-//    sourceDirs = files(subprojects.sourceSets.main.allSource.srcDirs).files.absolutePath
-//    jacocoReportPath = file("${buildDir}/reports/jacoco/report.xml")
-//}
-//
-//task codeCoverageReport(type: JacocoReport) {
-//    executionData fileTree(project.rootDir.absolutePath).include("**/build/jacoco/*.exec")
-//
-//    subprojects.each {
-//        if(!it.sourceSets.test.kotlin.srcDirs.every { !it.exists() }) {
-//            sourceSets it.sourceSets.main
-//        }
-//    }
-//
-//    reports {
-//        xml.enabled true
-//        xml.destination file("${buildDir}/reports/jacoco/report.xml")
-//        html.enabled false
-//        csv.enabled false
-//    }
-//}
-//
 
 project(":kjob-core") {
     dependencies {
