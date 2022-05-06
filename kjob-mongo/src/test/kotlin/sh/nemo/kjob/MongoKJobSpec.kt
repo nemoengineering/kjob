@@ -6,8 +6,8 @@ import io.kotest.matchers.shouldBe
 import io.kotest.provided.ProjectConfig
 import sh.nemo.kjob.utils.waitSomeTime
 import java.util.concurrent.CountDownLatch
+import kotlin.time.Duration.Companion.milliseconds
 import kotlin.time.ExperimentalTime
-import kotlin.time.milliseconds
 
 @ExperimentalTime
 class MongoKJobSpec : ShouldSpec() {

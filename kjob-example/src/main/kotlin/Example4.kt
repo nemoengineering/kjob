@@ -3,8 +3,8 @@ import sh.nemo.kjob.Job
 import sh.nemo.kjob.kjob
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
+import kotlin.time.Duration.Companion.seconds
 import kotlin.time.ExperimentalTime
-import kotlin.time.seconds
 
 object MyFirstDelayedJob : Job("my-first-delayed-job") {
     val index = integer("index")

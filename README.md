@@ -1,40 +1,32 @@
 # kjob
 
-[![Bintray](https://img.shields.io/badge/dynamic/json.svg?label=latest%20release&url=https%3A%2F%2Fapi.bintray.com%2F%2Fpackages%2Fjustwrote%2Fmaven%2Fkjob-core%2Fversions%2F_latest&query=name&colorB=328998&style=flat)](https://bintray.com/justwrote/maven/kjob-core)
-[![GitHub Build Status](https://img.shields.io/github/workflow/status/justwrote/kjob/CI/master?style=flat)](https://github.com/justwrote/kjob/actions?query=workflow%3ACI)
-[![Coverage Status](https://coveralls.io/repos/github/justwrote/kjob/badge.svg)](https://coveralls.io/github/justwrote/kjob)
+[![](https://jitpack.io/v/nemoengineering/kjob.svg)](https://jitpack.io/#nemoengineering/kjob)
+[![CD/CI Workflow](https://github.com/nemoengineering/kjob/actions/workflows/cdci-workflow.yml/badge.svg)](https://github.com/nemoengineering/kjob/actions/workflows/cdci-workflow.yml)
 
 A coroutine based persistent background (cron) scheduler written in Kotlin.
 
-## Features
-
-* Persist scheduled jobs (e.g. mongoDB)
-* [Cron](#cron) jobs 
-* Nice DSL for registering and scheduling jobs
-* Multiple instances possible
-* Failed jobs will be rescheduled
-* Other instances will restart the work of a crashed one
-* Pool for blocking and non-blocking jobs
-* Pool size can be defined to go easy on resources
-* Add new features through your own [extensions](#extensions)
+This codebase is a fork of https://github.com/justwrote/kjob
 
 ## Installation
 
-Just add the following lines to your `build.gradle`. For `<version>` see the button above or [releases/latest](https://github.com/justwrote/kjob/releases/latest) for the current version number.
+This library is currently available through JitPack.
 
-```groovy
+In order to use the library, add first the JitPack repository to the `repositories` block and then the dependency to
+the `dependencies` block:
+
+```kotlin
 repositories {
-  jcenter()
+    maven("https://jitpack.io")
 }
 
 dependencies {
-  implementation "it.justwrote:kjob-core:<version>"
-  implementation "it.justwrote:kjob-mongo:<version>" // for mongoDB persistence
-  testImplementation "it.justwrote:kjob-inmem:<version>" // for in-memory 'persistence' (e.g. tests)
+    implementation("com.github.nemoengineering:kjob-core:<version>")
+    implementation("com.github.nemoengineering:kjob-mongo:<version>") // for mongoDB persistence
+    implementation("com.github.nemoengineering:kjob-inmem:<version>") // for in-memory 'persistence' (e.g. tests)
 }
 ```
 
-## Using kjob
+## Usage
 
 ```kotlin
 import sh.nemo.kjob.Mongo
@@ -77,27 +69,36 @@ kjob.schedule(OrderCreatedEmail, 5.seconds) {
 // this runs the job not immediately but - you may guess it already - in 5 seconds!
 ```
 
-For more details please take a look at the [examples](https://github.com/justwrote/kjob/blob/master/kjob-example/src/main/kotlin)
+For more details please take a look at
+the [examples](https://github.com/nemoengineering/kjob/tree/main/kjob-example/src/main/kotlin).
 
 ## Starting kjob
 
-Multiple schedulers are running in the background after starting kjob. There is one looking for new jobs every second 
-(period can be defined in the configuration). If a job has been found that has not yet been started (or reset after an error)
-and the kjob instance is currently not executing too many other jobs of the same kind (there are blocking and non-blocking jobs)
-kjob will process it. The second scheduler is handling the locking. It indirectly tells the other kjob instances that 
-this one is still alive. The last scheduler is cleaning up locked jobs of other not responding kjob instances to make the jobs
+Multiple schedulers are running in the background after starting kjob. There is one looking for new jobs every second
+(period can be defined in the configuration). If a job has been found that has not yet been started (or reset after an
+error)
+and the kjob instance is currently not executing too many other jobs of the same kind (there are blocking and
+non-blocking jobs)
+kjob will process it. The second scheduler is handling the locking. It indirectly tells the other kjob instances that
+this one is still alive. The last scheduler is cleaning up locked jobs of other not responding kjob instances to make
+the jobs
 available again for execution.
 
 ## Multiple kjob instances
 
-To be fault tolerant you sometimes want to have multiple instances of your job processor. This might be in the same app or on 
-different nodes. Therefore, every kjob instances has a unique id which will be added to the job it is currently executing.
-This actually locks a job to a specific kjob instance. If the kjob instance is somehow dying while executing a job another 
-kjob instance will remove the lock after a specific time (which can be defined in the configuration) and will pick it up again. 
+To be fault-tolerant you sometimes want to have multiple instances of your job processor. This might be in the same app
+or on
+different nodes. Therefore, every kjob instances has a unique id which will be added to the job it is currently
+executing.
+This actually locks a job to a specific kjob instance. If the kjob instance is somehow dying while executing a job
+another
+kjob instance will remove the lock after a specific time (which can be defined in the configuration) and will pick it up
+again.
 
 ## Changing Configuration
 
-Changing the config is fairly easy. There is not another config file and everything will be done in code - so you can use
+Changing the config is fairly easy. There is not another config file and everything will be done in code - so you can
+use
 your own configuration.
 
 ```kotlin
@@ -106,11 +107,12 @@ kjob(InMem) {
     blockingMaxJobs = 3 // same for blocking jobs
     maxRetries = 5 // how often will a job be retried until it fails
     defaultJobExecutor = JobExecutionType.BLOCKING // default job execution type
-        
-    exceptionHandler = { t: Throwable -> logger.error("Unhandled exception", t) } // default error handler for coroutines
+
+    exceptionHandler =
+        { t: Throwable -> logger.error("Unhandled exception", t) } // default error handler for coroutines
     keepAliveExecutionPeriodInSeconds = 60 // the time between 'I am alive' notifications
     jobExecutionPeriodInSeconds = 1 // the time between new job executions
-    cleanupPeriodInSeconds = 300 // the time between job clean ups
+    cleanupPeriodInSeconds = 300 // the time between job clean-ups
     cleanupSize = 50 // the amount of jobs that will be cleaned up per schedule
 }.start()
 ```
@@ -138,7 +140,11 @@ If you want to add new features to kjob you can do so with a kjob extension.
 ```kotlin
 object ShowIdExtension : ExtensionId<ShowIdEx>
 
-class ShowIdEx(private val config: Configuration, private val kjobConfig: BaseKJob.Configuration, private val kjob: BaseKJob<BaseKJob.Configuration>) : BaseExtension(ShowIdExtension) {
+class ShowIdEx(
+    private val config: Configuration,
+    private val kjobConfig: BaseKJob.Configuration,
+    private val kjob: BaseKJob<BaseKJob.Configuration>
+) : BaseExtension(ShowIdExtension) {
     class Configuration : BaseExtension.Configuration()
 
     fun showId() {
@@ -147,9 +153,13 @@ class ShowIdEx(private val config: Configuration, private val kjobConfig: BaseKJ
     }
 }
 
-object ShowIdModule : ExtensionModule<ShowIdEx, ShowIdEx.Configuration, BaseKJob<BaseKJob.Configuration>, BaseKJob.Configuration> {
+object ShowIdModule :
+    ExtensionModule<ShowIdEx, ShowIdEx.Configuration, BaseKJob<BaseKJob.Configuration>, BaseKJob.Configuration> {
     override val id: ExtensionId<ShowIdEx> = ShowIdExtension
-    override fun create(configure: ShowIdEx.Configuration.() -> Unit, kjobConfig: BaseKJob.Configuration): (BaseKJob<BaseKJob.Configuration>) -> ShowIdEx {
+    override fun create(
+        configure: ShowIdEx.Configuration.() -> Unit,
+        kjobConfig: BaseKJob.Configuration
+    ): (BaseKJob<BaseKJob.Configuration>) -> ShowIdEx {
         return { ShowIdEx(ShowIdEx.Configuration().apply(configure), kjobConfig, it) }
     }
 }
@@ -165,15 +175,17 @@ val kjob = kjob(InMem) {
 kjob(ShowIdExtension).showId() // access our new extension method
 ```
 
-To see a more advanced version take a look at this [example](https://github.com/justwrote/kjob/blob/master/kjob-example/src/main/kotlin/Example_Extension.kt)
+To see a more advanced version take a look at
+this [example](https://github.com/nemoengineering/kjob/blob/main/kjob-example/src/main/kotlin/Example_Extension.kt).
 
 ## Cron
 
-With kjob you are also able to schedule jobs with the familiar cron expression. To get Kron - the name of the extension to enable Cron scheduling in kjob - you need to add the following dependency:
+With kjob you are also able to schedule jobs with the familiar cron expression. To get Kron - the name of the extension
+to enable Cron scheduling in kjob - you need to add the following dependency:
 
-```groovy
+```kotlin
 dependencies {
-  implementation "it.justwrote:kjob-kron:<version>"
+    implementation("com.github.nemoengineering:kjob-kron:<version>")
 }
 ``` 
 
@@ -200,19 +212,9 @@ kjob(Kron).kron(PrintStuff) {
 }
 ```
 
-You can find more in this [example](https://github.com/justwrote/kjob/blob/master/kjob-example/src/main/kotlin/Example_Kron.kt)
-
-
-## Roadmap
-
-Here is an unordered list of features that I would like to see in kjob. If you 
-consider one of them important please open an issue.
-
-- Priority support
-- Backoff algorithm for failed jobs
-- REST API
-- Dashboard
+You can find more in
+this [example](https://github.com/nemoengineering/kjob/blob/main/kjob-example/src/main/kotlin/Example_Kron.kt).
 
 ## License
 
-kjob is licensed under the [Apache 2.0 License](https://github.com/justwrote/kjob/blob/master/LICENSE).
+kjob is licensed under the [Apache 2.0 License](https://github.com/nemoengineering/kjob/blob/main/LICENSE).

@@ -27,8 +27,8 @@ import java.time.Duration
 import java.time.Instant
 import java.time.ZoneId
 import java.util.concurrent.CountDownLatch
+import kotlin.time.Duration.Companion.minutes
 import kotlin.time.ExperimentalTime
-import kotlin.time.minutes
 
 @ExperimentalTime
 class BaseKJobSpec : ShouldSpec() {
