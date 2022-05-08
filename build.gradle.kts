@@ -55,7 +55,7 @@ subprojects {
     }
 
     configurations.create("testArtifacts") {
-        extendsFrom(configurations["testRuntime"])
+        extendsFrom(configurations["testRuntimeOnly"])
     }
 
     tasks.register("testJar", Jar::class.java) {
