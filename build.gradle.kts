@@ -93,7 +93,7 @@ project(":kjob-core") {
         api("org.slf4j:slf4j-api:1.7.36")
 
         testImplementation("io.kotest:kotest-runner-junit5:4.3.1")
-        testImplementation("io.kotest:kotest-assertions-core:4.3.1")
+        testImplementation("io.kotest:kotest-assertions-core:5.3.0")
         testImplementation("io.mockk:mockk:1.12.4")
         testRuntimeOnly("ch.qos.logback:logback-classic:1.2.11")
     }
@@ -123,7 +123,7 @@ project(":kjob-mongo") {
 
         testImplementation("io.reactivex.rxjava2:rxkotlin:2.4.0")
         testImplementation("io.kotest:kotest-runner-junit5:4.3.1")
-        testImplementation("io.kotest:kotest-assertions-core:4.3.1")
+        testImplementation("io.kotest:kotest-assertions-core:5.3.0")
         testImplementation("de.flapdoodle.embed:de.flapdoodle.embed.mongo:3.4.5")
         testImplementation("io.mockk:mockk:1.12.4")
         testImplementation(project(path = ":kjob-core", configuration = "testArtifacts"))
@@ -138,7 +138,7 @@ project(":kjob-inmem") {
         implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.1")
 
         testImplementation("io.kotest:kotest-runner-junit5:4.3.1")
-        testImplementation("io.kotest:kotest-assertions-core:4.3.1")
+        testImplementation("io.kotest:kotest-assertions-core:5.3.0")
         testImplementation("io.mockk:mockk:1.12.4")
         testImplementation(project(path = ":kjob-core", configuration = "testArtifacts"))
 
@@ -157,7 +157,7 @@ project(":kjob-kron") {
 
         testImplementation(project(":kjob-inmem"))
         testImplementation("io.kotest:kotest-runner-junit5:4.3.1")
-        testImplementation("io.kotest:kotest-assertions-core:4.3.1")
+        testImplementation("io.kotest:kotest-assertions-core:5.3.0")
         testImplementation("io.mockk:mockk:1.12.4")
         testImplementation(project(path = ":kjob-core", configuration = "testArtifacts"))
 
