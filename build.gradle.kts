@@ -119,7 +119,7 @@ project(":kjob-mongo") {
     dependencies {
         implementation(project(":kjob-core"))
         implementation("org.mongodb:mongodb-driver-reactivestreams:4.6.0")
-        implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactive:1.6.1")
+        implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactive:1.6.2")
 
         testImplementation("io.reactivex.rxjava2:rxkotlin:2.4.0")
         testImplementation("io.kotest:kotest-runner-junit5:4.3.1")
