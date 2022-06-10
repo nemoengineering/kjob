@@ -118,7 +118,7 @@ project(":kjob-example") {
 project(":kjob-mongo") {
     dependencies {
         implementation(project(":kjob-core"))
-        implementation("org.mongodb:mongodb-driver-reactivestreams:4.6.0")
+        implementation("org.mongodb:mongodb-driver-reactivestreams:4.6.1")
         implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactive:1.6.2")
 
         testImplementation("io.reactivex.rxjava2:rxkotlin:2.4.0")
