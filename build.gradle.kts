@@ -3,7 +3,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     base
     `maven-publish`
-    kotlin("jvm") version "1.6.21"
+    kotlin("jvm") version "1.7.0"
     id("com.adarshr.test-logger") version "3.2.0"
 
     // Linter
