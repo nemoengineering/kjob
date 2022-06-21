@@ -42,9 +42,9 @@ class MongoRepositorySpec : ShouldSpec() {
         override fun keyOf(value: Counter): String = value.id
     }
 
-    override fun afterSpec(spec: Spec) {
+    override suspend fun afterSpec(spec: Spec) {
         super.afterSpec(spec)
-        runBlocking { testee.deleteAll() }
+        testee.deleteAll()
     }
 
     init {

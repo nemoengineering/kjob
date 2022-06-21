@@ -24,8 +24,8 @@ class MongoLockRepositorySpec : LockRepositoryContract() {
         mongoTestee.deleteAll()
     }
 
-    override fun beforeSpec(spec: Spec) {
-        runBlocking { mongoTestee.ensureIndexes() }
+    override suspend fun beforeSpec(spec: Spec) {
+        mongoTestee.ensureIndexes()
     }
 
     init {
