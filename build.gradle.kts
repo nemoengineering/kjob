@@ -89,7 +89,7 @@ subprojects {
 
 project(":kjob-core") {
     dependencies {
-        implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.2")
+        implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.3")
         api("org.slf4j:slf4j-api:1.7.36")
 
         testImplementation("io.kotest:kotest-runner-junit5:4.3.1")
@@ -110,7 +110,7 @@ project(":kjob-example") {
             exclude(group = "org.slf4j", module = "slf4j-simple")
         }
 
-        implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.2")
+        implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.3")
         implementation("ch.qos.logback:logback-classic:1.2.11")
     }
 }
@@ -135,7 +135,7 @@ project(":kjob-mongo") {
 project(":kjob-inmem") {
     dependencies {
         implementation(project(":kjob-core"))
-        implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.2")
+        implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.3")
 
         testImplementation("io.kotest:kotest-runner-junit5:4.3.1")
         testImplementation("io.kotest:kotest-assertions-core:4.3.1")
@@ -149,7 +149,7 @@ project(":kjob-inmem") {
 project(":kjob-kron") {
     dependencies {
         implementation(project(":kjob-core"))
-        implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.2")
+        implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.3")
         implementation("com.cronutils:cron-utils:9.1.6") {
             exclude(group = "org.slf4j", module = "slf4j-simple")
         }
