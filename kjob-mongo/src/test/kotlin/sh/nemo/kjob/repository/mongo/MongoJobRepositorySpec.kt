@@ -31,8 +31,8 @@ class MongoJobRepositorySpec : JobRepositoryContract() {
 
     override fun randomJobId(): String = ObjectId.get().toHexString()
 
-    override fun beforeSpec(spec: Spec) {
-        runBlocking { mongoTestee.ensureIndexes() }
+    override suspend fun beforeSpec(spec: Spec) {
+        mongoTestee.ensureIndexes()
     }
 
     init {
