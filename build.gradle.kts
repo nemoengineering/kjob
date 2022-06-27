@@ -7,7 +7,7 @@ plugins {
     id("com.adarshr.test-logger") version "3.2.0"
 
     // Linter
-    id("org.jmailen.kotlinter") version "3.10.0"
+    id("org.jmailen.kotlinter") version "3.11.1"
 }
 
 allprojects {
